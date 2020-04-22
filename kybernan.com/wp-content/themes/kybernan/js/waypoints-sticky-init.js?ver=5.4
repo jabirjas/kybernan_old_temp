@@ -1,0 +1,221 @@
+jQuery(document).ready(function($) {
+
+
+$('.site-inner').waypoint(function(direction) {
+      $('.postBar, #tutorialMenu').slideToggle('fast');
+}, {
+  offset: 'bottom-in-view'
+});
+
+
+  $('#front-page-2').waypoint(function(direction) {
+      $('.front-page-subnav').fadeToggle()
+  },{offset:100}
+  );
+
+
+// Logging
+var $things = $('#logging');
+
+$things.waypoint(function(direction) {
+  if (direction === 'down') {
+    $('.menu-logging').addClass('active')
+  }
+});
+
+$things.waypoint(function(direction) {
+  if (direction === 'up') {
+   $('.menu-logging').addClass('active'),
+   $('.menu-modules, .menu-migration').removeClass('active')
+  }
+}, {
+  offset: 'bottom-in-view'
+});
+
+
+// Modules
+
+var $things = $('#modules');
+
+$things.waypoint(function(direction) {
+  if (direction === 'down') {
+    $('.menu-modules').addClass('active'),
+    $('.menu-logging, .menu-migration').removeClass('active')
+  }
+},{offset: 100}
+);
+
+
+$things.waypoint(function(direction) {
+  if (direction === 'up') {
+   $('.menu-modules').addClass('active'),
+   $('.menu-logging, .menu-migration').removeClass('active')
+  }
+}, {
+  offset: 'bottom-in-view'
+});
+
+
+// Migration
+var $things = $('#migration');
+
+$things.waypoint(function(direction) {
+  if (direction === 'down') {
+    $('.menu-migration').addClass('active'),
+    $('.menu-logging, .menu-modules').removeClass('active')
+  }
+},{offset: 100}
+);
+
+$things.waypoint(function(direction) {
+  if (direction === 'up') {
+   $('.menu-migration').addClass('active'),
+   $('.menu-logging, .menu-mmodules, .menu-faq').removeClass('active')
+  }
+}, {
+  offset: 'bottom-in-view'
+});
+
+
+// Tips
+
+
+var $things = $('#faq');
+
+$things.waypoint(function(direction) {
+  if (direction === 'down') {
+    $('.menu-faq').addClass('active'),
+    $('.menu-logging, .menu-modules, .menu-migration').removeClass('active')
+  }
+},{offset: 100}
+);
+
+$things.waypoint(function(direction) {
+  if (direction === 'up') {
+   $('.menu-faq').addClass('active'),
+   $('.menu-logging, .menu-modules, .menu-migration').removeClass('active')
+  }
+}, {
+  offset: 'bottom-in-view'
+});
+
+
+  var b = new Date();
+  var c = b.getDate();
+
+  var d=new Date();
+  var month=new Array();
+  month[0]="January";
+  month[1]="February";
+  month[2]="March";
+  month[3]="April";
+  month[4]="May";
+  month[5]="June";
+  month[6]="July";
+  month[7]="August";
+  month[8]="September";
+  month[9]="October";
+  month[10]="November";
+  month[11]="December";
+  var n = month[d.getMonth()];
+
+ /* $('#date').append("<span>"+n+", "+c+"</span>")*/
+
+
+  function scrollToNew () {
+    scrollTop = $(window).scrollTop();
+  $('.subsection').each(function(i, h2){ // loop through article headings
+    h2top = $(h2).offset().top; // get article heading top
+    if (scrollTop < h2top) { // compare if document is below heading
+      $.scrollTo(h2, 800); // scroll to in .8 of a second
+      return false; // exit function
+    }
+  });
+}
+
+
+
+
+  $(".booknew:not(.static-book)").stick_in_parent({offset_top: 50});
+
+
+
+  $('#rapidLogging').waypoint(function(direction) {
+    $('#date, .pageNumber').fadeOut();
+  });
+
+
+  $('#topics').waypoint(function(direction) {
+
+      $('#date, .pageNumber').fadeToggle();
+  },
+  {offset: 200}
+  );
+
+  $('#bullets').waypoint(function(direction) {
+  	if (direction === 'down') {
+  	 $(function() {
+  			$('.booknew li').each(function(i) {
+  			$(this).delay((i++) * 100).fadeTo(500, 1);  })
+  		});
+  	}
+  	$('.event, .task, .note, .signifier').removeClass('highlight')
+  },
+  {offset: 200}
+  );
+
+  $('#bullets').waypoint(function(direction) {
+  		if (direction === 'up') {
+  			$('.booknew li').fadeToggle();
+  		};
+  	$('.events, .tasks, .notes, .signifier').removeClass('highlight')
+  },
+  {offset: 200}
+  );
+
+
+  	
+
+  $('#tasks').waypoint(function(direction) {
+      $('.tasks').addClass('highlight', 1000),
+      $('.notes, .events, .signifier').removeClass('highlight')
+  },
+  {offset: 200}
+  );
+
+
+  $('#notes').waypoint(function(direction) {
+
+      $('.notes').addClass('highlight', 1000),
+      $('.events, .tasks, .signifiers').removeClass('highlight')
+
+  },
+  {offset: 200}
+  );
+
+
+  $('#events').waypoint(function(direction) {
+
+      $('.events').toggleClass('highlight', 1000),
+      $(' .tasks, .notes, .signifiers').removeClass('highlight')
+  },
+  {offset: 200}
+  );
+
+  $('#signifiers').waypoint(function(direction) {
+      $('.booknew ul .eye, .booknew ul .inspiration, .booknew ul .priority').slideToggle(),
+      $('.booknew ul .eye, .booknew ul .inspiration, .booknew ul .priority').toggleClass('highlight', 1000),
+      $('.events, .tasks, .notes').removeClass('highlight')
+
+  },
+  {offset: 200}
+  );
+
+
+  $('.reveal_comments, .entry-comments-link').click(function(){
+      $('#disqus_thread ').slideDown('fast');
+      $('.reveal_comments').slideUp();
+  });
+
+
+});
